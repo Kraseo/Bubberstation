@@ -10,6 +10,7 @@
 	stage_prob = 5
 	visibility_flags = HIDDEN_SCANNER|HIDDEN_PANDEMIC
 	disease_flags = CURABLE
+	bypasses_immunity = TRUE
 	var/list/stage1 = list("You feel unremarkable.")
 	var/list/stage2 = list("You feel boring.")
 	var/list/stage3 = list("You feel utterly plain.")
@@ -58,9 +59,9 @@
 			to_chat(affected_mob, pick(stage5))
 		if(QDELETED(affected_mob))
 			return
-		if(affected_mob.notransform)
+		if(HAS_TRAIT_FROM(affected_mob, TRAIT_NO_TRANSFORM, REF(src)))
 			return
-		affected_mob.notransform = 1
+		ADD_TRAIT(affected_mob, TRAIT_NO_TRANSFORM, REF(src))
 		for(var/obj/item/W in affected_mob.get_equipped_items(include_pockets = TRUE))
 			affected_mob.dropItemToGround(W)
 		for(var/obj/item/I in affected_mob.held_items)

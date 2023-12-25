@@ -12,7 +12,7 @@
 	throw_range = 3
 	wound_bonus = 10
 	w_class = WEIGHT_CLASS_BULKY
-	flags_1 = CONDUCT_1
+	obj_flags = CONDUCTS_ELECTRICITY
 	armour_penetration = 20
 	slot_flags = ITEM_SLOT_BACK
 	attack_verb_continuous = list("chops", "slices", "cuts", "reaps")
@@ -24,7 +24,7 @@
 	var/swiping = FALSE
 
 /obj/item/scythe/pre_attack(atom/A, mob/living/user, params)
-	if(!istype(A, /obj/structure/spacevine) && !istype(A, /mob/living/simple_animal/hostile/venus_human_trap))
+	if(!istype(A, /obj/structure/spacevine) && !istype(A, /mob/living/basic/venus_human_trap))
 		return ..()
 	if(swiping)
 		return ..()

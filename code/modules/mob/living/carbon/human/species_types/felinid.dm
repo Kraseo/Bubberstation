@@ -4,6 +4,7 @@
 	id = SPECIES_FELINE
 	examine_limb_id = SPECIES_HUMAN
 	mutant_bodyparts = list("ears" = "Cat", "wings" = "None")
+	mutantbrain = /obj/item/organ/internal/brain/felinid
 	mutanttongue = /obj/item/organ/internal/tongue/cat
 	/* SKYRAT EDIT REMOVAL - CUSTOMIZATION
 	mutantears = /obj/item/organ/internal/ears/cat
@@ -12,7 +13,7 @@
 	)
 	*/ // SKYRAT EDIT REMOVAL END
 	inherent_traits = list(
-		TRAIT_CAN_USE_FLIGHT_POTION,
+		TRAIT_CATLIKE_GRACE,
 		TRAIT_HATED_BY_DOGS,
 		TRAIT_USES_SKINTONES,
 	)
@@ -23,8 +24,6 @@
 	family_heirlooms = list(/obj/item/toy/cattoy)
 	/// When false, this is a felinid created by mass-purrbation
 	var/original_felinid = TRUE
-	/// Brain size for scaling
-	var/brain_size = 0.8
 
 // Prevents felinids from taking toxin damage from carpotoxin
 /datum/species/human/felinid/handle_chemical(datum/reagent/chem, mob/living/carbon/human/affected, seconds_per_tick, times_fired)
@@ -47,21 +46,12 @@
 			ears.Insert(target_human, drop_if_replaced = FALSE)
 		else
 			mutantears = /obj/item/organ/internal/ears
-		var/obj/item/organ/internal/brain/current_brain = target_human.get_organ_by_type(/obj/item/organ/internal/brain)
-		if(current_brain)
-			current_brain.transform = current_brain.transform.Scale(brain_size) //smaller brain
-	return ..()
-
-/datum/species/human/felinid/on_species_loss(mob/living/carbon/former_feline, datum/species/old_species, pref_load)
-	if(iscarbon(former_feline))
-		var/obj/item/organ/internal/brain/current_brain = former_feline.get_organ_by_type(/obj/item/organ/internal/brain)
-		if(current_brain)
-			current_brain.transform = current_brain.transform.Scale(1 / brain_size) //bigger brain
 	return ..()
 
 /datum/species/human/felinid/randomize_features(mob/living/carbon/human/human_mob)
-	randomize_external_organs(human_mob)
-	return ..()
+	var/list/features = ..()
+	features["ears"] = pick("None", "Cat")
+	return features
 
 /proc/mass_purrbation()
 	for(var/mob in GLOB.human_list)
@@ -159,6 +149,10 @@
 	human_for_preview.update_body(TRUE)
 	// SKYRAT EDIT END
 
+/datum/species/human/felinid/get_physical_attributes()
+	return "Felinids are very similar to humans in almost all respects, with their biggest differences being the ability to lick their wounds, \
+		and an increased sensitivity to noise, which is often detrimental. They are also rather fond of eating oranges."
+
 /datum/species/human/felinid/get_species_description()
 	return "Felinids are one of the many types of bespoke genetic \
 		modifications to come of humanity's mastery of genetic science, and are \
@@ -189,6 +183,14 @@
 			SPECIES_PERK_ICON = "grin-tongue",
 			SPECIES_PERK_NAME = "Grooming",
 			SPECIES_PERK_DESC = "Felinids can lick wounds to reduce bleeding.",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
+			SPECIES_PERK_ICON = FA_ICON_PERSON_FALLING,
+			SPECIES_PERK_NAME = "Catlike Grace",
+			SPECIES_PERK_DESC = "Felinids have catlike instincts allowing them to land upright on their feet.  \
+				Instead of being knocked down from falling, you only recieve a short slowdown. \
+				However, they do not have catlike legs, and the fall will deal additional damage.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,

@@ -56,9 +56,9 @@
 	suit = /obj/item/clothing/suit/armor/vest/peacekeeper/security_medic
 	l_hand = /obj/item/storage/medkit/brute
 	head = /obj/item/clothing/head/beret/sec/peacekeeper/security_medic
-	backpack_contents = list(
-		/obj/item/storage/box/gunset/firefly = 1,
-		)
+/* 	backpack_contents = list(
+		/obj/item/storage/box/gunset/firefly = 1, // FIX THIS LATER
+		) */
 	backpack = /obj/item/storage/backpack/security
 	satchel = /obj/item/storage/backpack/satchel/sec
 	duffelbag = /obj/item/storage/backpack/duffelbag/sec
@@ -90,9 +90,9 @@
 	keyslot = new /obj/item/encryptionkey/headset_medsec
 
 /obj/structure/closet/secure_closet/security_medic
-	name = "security medics's locker"
-	req_access = list(ACCESS_SECURITY)
-	icon = 'modular_skyrat/modules/sec_haul/icons/lockers/closet.dmi'
+	name = "security medic's locker"
+	req_access = list(ACCESS_BRIG)
+	icon = 'modular_zubbers/icons/obj/closets/secmed_closet.dmi'
 	icon_state = "secmed"
 
 
@@ -104,7 +104,6 @@
 	new /obj/item/clothing/suit/toggle/labcoat/skyrat/security_medic/blue(src)
 	new /obj/item/clothing/suit/hazardvest/security_medic/blue(src)
 	new /obj/item/clothing/head/helmet/sec/peacekeeper/security_medic(src)
-	new /obj/item/clothing/under/rank/security/peacekeeper/tactical(src)
 	new /obj/item/radio/headset/headset_medsec(src)
 	new /obj/item/storage/medkit/emergency(src)
 	new /obj/item/clothing/suit/jacket/straight_jacket(src)

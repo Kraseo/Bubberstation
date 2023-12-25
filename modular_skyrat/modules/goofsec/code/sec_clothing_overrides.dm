@@ -461,10 +461,6 @@
 			RESKIN_ICON_STATE = "vest_white",
 			RESKIN_WORN_ICON_STATE = "vest_white"
 		),
-		"Peacekeeper Variant" = list(
-			RESKIN_ICON_STATE = "peacekeeper_white",
-			RESKIN_WORN_ICON_STATE = "peacekeeper_white"
-		)
 	)
 
 /obj/item/clothing/suit/armor/hos
@@ -497,10 +493,6 @@
 //Standard Bulletproof Vest
 /obj/item/clothing/suit/armor/bulletproof
 	desc = "A Type-III-AD-P heavy bulletproof vest that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent."
-	icon = 'modular_skyrat/master_files/icons/obj/clothing/suits/armor.dmi'
-	worn_icon = 'modular_skyrat/master_files/icons/mob/clothing/suits/armor.dmi'
-	icon_state = "vest_bulletproof"
-	body_parts_covered = CHEST|GROIN|ARMS //Our sprite has groin and arm protections, so we get it too.
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 //Riot Armor
@@ -762,6 +754,8 @@
 		/obj/item/gun/energy/dueling,
 		/obj/item/gun/energy/laser/thermal,
 		/obj/item/gun/ballistic/rifle/boltaction, //fits if you make it an obrez
+		/obj/item/gun/energy/laser/captain,
+		/obj/item/gun/energy/e_gun/hos,
 		))
 
 /obj/item/storage/belt/holster/detective
@@ -785,8 +779,27 @@
 		/obj/item/gun/energy/dueling,
 		/obj/item/gun/energy/laser/thermal,
 		/obj/item/gun/ballistic/rifle/boltaction, //fits if you make it an obrez
+		/obj/item/gun/energy/laser/captain,
+		/obj/item/gun/energy/e_gun/hos,
 		))
 
+/obj/item/storage/belt/holster/energy/Initialize(mapload)
+	. = ..()
+	atom_storage.max_slots = 2
+	atom_storage.max_specific_storage = WEIGHT_CLASS_NORMAL
+	atom_storage.set_holdable(list(
+		/obj/item/gun/energy/e_gun/mini,
+		/obj/item/gun/energy/disabler,
+		/obj/item/gun/energy/dueling,
+		/obj/item/food/grown/banana,
+		/obj/item/gun/energy/laser/thermal,
+		/obj/item/gun/energy/recharge/ebow,
+		/obj/item/gun/energy/laser/captain,
+		/obj/item/gun/energy/e_gun/hos,
+		/obj/item/gun/ballistic/automatic/pistol/plasma_marksman,
+		/obj/item/gun/ballistic/automatic/pistol/plasma_thrower,
+		/obj/item/ammo_box/magazine/recharge/plasma_battery,
+	))
 /*
 *	HEAD
 */

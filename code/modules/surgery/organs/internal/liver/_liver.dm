@@ -1,7 +1,7 @@
 #define LIVER_DEFAULT_TOX_TOLERANCE 3 //amount of toxins the liver can filter out
 #define LIVER_DEFAULT_TOX_RESISTANCE 1 //lower values lower how harmful toxins are to the liver
 #define LIVER_FAILURE_STAGE_SECONDS 180 //amount of seconds before liver failure reaches a new stage // SKYRAT EDIT CHANGE - Original: 60
-#define MAX_TOXIN_LIVER_DAMAGE 2 //the max damage the liver can recieve per second (~1 min at max damage will destroy liver)
+#define MAX_TOXIN_LIVER_DAMAGE 2 //the max damage the liver can receive per second (~1 min at max damage will destroy liver)
 
 /obj/item/organ/internal/liver
 	name = "liver"
@@ -172,18 +172,18 @@
 			to_chat(owner, span_userdanger("You feel stabbing pain in your abdomen!"))
 		if(2)
 			to_chat(owner, span_userdanger("You feel a burning sensation in your gut!"))
-			owner.vomit()
+			owner.vomit(VOMIT_CATEGORY_DEFAULT)
 		if(3)
 			to_chat(owner, span_userdanger("You feel painful acid in your throat!"))
-			owner.vomit(blood = TRUE)
+			owner.vomit(VOMIT_CATEGORY_BLOOD)
 		if(4)
 			to_chat(owner, span_userdanger("Overwhelming pain knocks you out!"))
-			owner.vomit(blood = TRUE, distance = rand(1,2))
+			owner.vomit(VOMIT_CATEGORY_BLOOD, distance = rand(1,2))
 			owner.emote("Scream")
 			owner.AdjustUnconscious(2.5 SECONDS)
 		if(5)
 			to_chat(owner, span_userdanger("You feel as if your guts are about to melt!"))
-			owner.vomit(blood = TRUE,distance = rand(1,3))
+			owner.vomit(VOMIT_CATEGORY_BLOOD, distance = rand(1,3))
 			owner.emote("Scream")
 			owner.AdjustUnconscious(5 SECONDS)
 
@@ -245,6 +245,7 @@
 /obj/item/organ/internal/liver/cybernetic
 	name = "basic cybernetic liver"
 	desc = "A very basic device designed to mimic the functions of a human liver. Handles toxins slightly worse than an organic liver."
+	failing_desc = "seems to be broken."
 	icon_state = "liver-c"
 	organ_flags = ORGAN_ROBOTIC
 	maxHealth = STANDARD_ORGAN_THRESHOLD*0.5

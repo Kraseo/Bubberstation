@@ -12,7 +12,6 @@
 	var/safety_mode = FALSE // Temporarily stops machine if it detects a mob
 	var/icon_name = "grinder-o"
 	var/bloody = FALSE
-	var/eat_dir = WEST
 	var/amount_produced = 50
 	var/crush_damage = 1000
 	var/eat_victim_items = TRUE
@@ -34,6 +33,7 @@
 		/datum/material/bluespace
 	)
 	materials = AddComponent(/datum/component/material_container, allowed_materials, INFINITY, MATCONTAINER_NO_INSERT|BREAKDOWN_FLAGS_RECYCLER)
+	AddComponent(/datum/component/simple_rotation)
 	AddComponent(/datum/component/butchering/recycler, \
 	speed = 0.1 SECONDS, \
 	effectiveness = amount_produced, \
@@ -75,7 +75,7 @@
 /obj/machinery/recycler/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
 	default_unfasten_wrench(user, tool)
-	return TOOL_ACT_TOOLTYPE_SUCCESS
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/recycler/attackby(obj/item/I, mob/user, params)
 	if(default_deconstruction_screwdriver(user, "grinder-oOpen", "grinder-o0", I))
@@ -110,16 +110,11 @@
 	. = ..()
 	if(!anchored)
 		return
-	if(border_dir == eat_dir)
+	if(border_dir == dir)
 		return TRUE
 
 /obj/machinery/recycler/proc/on_entered(datum/source, atom/movable/enterer, old_loc)
 	SIGNAL_HANDLER
-
-	// This is explicitly so we avoid processing items that are entering from nullspace,
-	// to avoid infinite loops.
-	if(!old_loc)
-		return
 
 	INVOKE_ASYNC(src, PROC_REF(eat), enterer)
 
@@ -133,6 +128,10 @@
 	if(!isturf(morsel.loc))
 		return //I don't know how you called Crossed() but stop it.
 	if(morsel.resistance_flags & INDESTRUCTIBLE)
+		return
+	if(morsel.flags_1 & HOLOGRAM_1)
+		visible_message(span_notice("[morsel] fades away!"))
+		qdel(morsel)
 		return
 
 	var/list/to_eat = (issilicon(morsel) ? list(morsel) : morsel.get_all_contents()) //eating borg contents leads to many bad things
@@ -237,9 +236,8 @@
 
 /obj/machinery/recycler/deathtrap
 	name = "dangerous old crusher"
-	obj_flags = CAN_BE_HIT | EMAGGED
+	obj_flags = CAN_BE_HIT | EMAGGED | NO_DECONSTRUCTION
 	crush_damage = 120
-	flags_1 = NODECONSTRUCT_1
 
 /obj/item/paper/guides/recycler
 	name = "paper - 'garbage duty instructions'"

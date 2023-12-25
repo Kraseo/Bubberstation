@@ -78,7 +78,7 @@
 		return ..()
 	affected_mob.reagents.remove_reagent(type, NANITE_SLURRY_ORGANIC_PURGE_RATE) //gets removed from organics very fast
 	if(prob(NANITE_SLURRY_ORGANIC_VOMIT_CHANCE))
-		affected_mob.vomit(vomit_type = VOMIT_NANITE)
+		affected_mob.vomit(vomit_flags = (MOB_VOMIT_MESSAGE | MOB_VOMIT_HARM), vomit_type = /obj/effect/decal/cleanable/vomit/nanites)
 	return TRUE
 
 #undef NANITE_SLURRY_ORGANIC_PURGE_RATE
@@ -98,10 +98,10 @@
 /datum/reagent/medicine/taste_suppressor/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
 
-	ADD_TRAIT(affected_mob, TRAIT_AGEUSIA, REAGENT_TRAIT)
+	ADD_TRAIT(affected_mob, TRAIT_AGEUSIA, TRAIT_REAGENT)
 
 
 /datum/reagent/medicine/taste_suppressor/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
 
-	REMOVE_TRAIT(affected_mob, TRAIT_AGEUSIA, REAGENT_TRAIT)
+	REMOVE_TRAIT(affected_mob, TRAIT_AGEUSIA, TRAIT_REAGENT)

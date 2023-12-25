@@ -273,7 +273,6 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/winter_coat/christmas
 	name = "Christmas Coat"
 	item_path = /obj/item/clothing/suit/hooded/wintercoat/skyrat/christmas
-	required_season = CHRISTMAS
 
 /datum/loadout_item/suit/winter_coat/christmas/green
 	name = "Green Christmas Coat"
@@ -295,9 +294,41 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 	name = "Red cloak"
 	item_path = /obj/item/clothing/suit/hooded/cloak/david
 
+/datum/loadout_item/suit/wellwornshirt
+	name = "Well-worn Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt
+
+/datum/loadout_item/suit/wellworn_graphicshirt
+	name = "Well-worn Graphic Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/graphic
+
 /datum/loadout_item/suit/ianshirt
-	name = "Ian Shirt"
-	item_path = /obj/item/clothing/suit/costume/ianshirt
+	name = "Well-worn Ian Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/graphic/ian
+
+/datum/loadout_item/suit/wornoutshirt
+	name = "Worn-out Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/wornout
+
+/datum/loadout_item/suit/wornout_graphicshirt
+	name = "Worn-out graphic Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/wornout/graphic
+
+/datum/loadout_item/suit/wornout_ianshirt
+	name = "Worn-out Ian Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/wornout/graphic/ian
+
+/datum/loadout_item/suit/messyshirt
+	name = "Messy Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/messy
+
+/datum/loadout_item/suit/messy_graphicshirt
+	name = "Messy Graphic Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/messy/graphic
+
+/datum/loadout_item/suit/messy_ianshirt
+	name = "Messy Ian Shirt"
+	item_path = /obj/item/clothing/suit/costume/wellworn_shirt/messy/graphic/ian
 
 /datum/loadout_item/suit/wornshirt
 	name = "Worn Shirt"
@@ -557,7 +588,7 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/navybluejacketofficer
 	name = "Security Officer's Navy Blue Formal Jacket"
 	item_path = /obj/item/clothing/suit/jacket/officer/blue
-	restricted_roles = list(JOB_SECURITY_OFFICER, JOB_HEAD_OF_SECURITY, JOB_SECURITY_MEDIC, JOB_WARDEN) //BUBBER EDIT
+	restricted_roles = list(JOB_SECURITY_OFFICER, JOB_HEAD_OF_SECURITY, JOB_WARDEN)
 
 /datum/loadout_item/suit/navybluejacketwarden
 	name = "Warden's Navy Blue Formal Jacket"
@@ -572,12 +603,12 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/security_jacket
 	name = "Security Jacket"
 	item_path = /obj/item/clothing/suit/toggle/jacket/sec
-	restricted_roles = list(JOB_HEAD_OF_SECURITY, JOB_SECURITY_OFFICER, JOB_SECURITY_MEDIC, JOB_WARDEN, JOB_DETECTIVE) //BUBBER EDIT
+	restricted_roles = list(JOB_HEAD_OF_SECURITY, JOB_SECURITY_OFFICER, JOB_WARDEN, JOB_DETECTIVE)
 
 /datum/loadout_item/suit/brit
 	name = "High Vis Armored Vest"
 	item_path = /obj/item/clothing/suit/armor/vest/peacekeeper/brit
-	restricted_roles = list(JOB_HEAD_OF_SECURITY, JOB_SECURITY_OFFICER, JOB_SECURITY_MEDIC, JOB_WARDEN, JOB_DETECTIVE, JOB_CORRECTIONS_OFFICER) //BUBBER EDIT
+	restricted_roles = list(JOB_HEAD_OF_SECURITY, JOB_SECURITY_OFFICER, JOB_WARDEN, JOB_DETECTIVE, JOB_CORRECTIONS_OFFICER)
 
 /datum/loadout_item/suit/british_jacket
 	name = "Peacekeeper Officer Coat"
@@ -608,11 +639,6 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 	item_path = /obj/item/clothing/suit/toggle/jacket/supply
 	restricted_roles = list(JOB_QUARTERMASTER, JOB_CARGO_TECHNICIAN, JOB_SHAFT_MINER, JOB_CUSTOMS_AGENT)
 
-/datum/loadout_item/suit/supply_gorka_jacket
-	name = "Supply Gorka Jacket"
-	item_path = /obj/item/clothing/suit/gorka/supply
-	restricted_roles = list(JOB_QUARTERMASTER, JOB_CARGO_TECHNICIAN, JOB_SHAFT_MINER, JOB_CUSTOMS_AGENT)
-
 /datum/loadout_item/suit/cargo_gorka_jacket
 	name = "Cargo Gorka Jacket"
 	item_path = /obj/item/clothing/suit/toggle/cargo_tech
@@ -627,7 +653,7 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/labcoat_highvis
 	name = "High-Vis Labcoat"
 	item_path = /obj/item/clothing/suit/toggle/labcoat/skyrat/highvis
-	restricted_roles = list(JOB_CHIEF_MEDICAL_OFFICER, JOB_PARAMEDIC, JOB_ATMOSPHERIC_TECHNICIAN, JOB_SECURITY_MEDIC, JOB_DETECTIVE, JOB_CHEMIST, JOB_ORDERLY) //BUBBER EDIT
+	restricted_roles = list(JOB_CHIEF_MEDICAL_OFFICER, JOB_PARAMEDIC, JOB_ATMOSPHERIC_TECHNICIAN, JOB_DETECTIVE, JOB_CHEMIST, JOB_ORDERLY)
 
 /*
 *	FAMILIES
@@ -691,3 +717,15 @@ GLOBAL_LIST_INIT(loadout_exosuits, generate_loadout_items(/datum/loadout_item/su
 /datum/loadout_item/suit/digicoat_glitched //Public donator reward for Razurath.
 	name = "Glitched Digicoat"
 	item_path = /obj/item/clothing/suit/toggle/digicoat/glitched
+
+/datum/loadout_item/suit/warm_coat
+	name = "Colourable Warm Coat"
+	item_path = /obj/item/clothing/suit/warm_coat
+
+/datum/loadout_item/suit/warm_sweater
+	name = "Colourable Warm Sweater"
+	item_path = /obj/item/clothing/suit/warm_sweater
+
+/datum/loadout_item/suit/heart_sweater
+	name = "Colourable Heart Sweater"
+	item_path = /obj/item/clothing/suit/heart_sweater
